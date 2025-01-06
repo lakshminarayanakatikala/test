@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post">
+      <input type="text" placeholder="user name" name="username" />
+      <input type="password" placeholder="password" name="password" />
+      <input type="submit" placeholder="submit" />
+    </form>
+
+    <br />
+    <br />
+    <form method="post">
+      <input type="text" placeholder="user name" name="username" />
+      <input type="password" placeholder="password" name="password" />
+      <input type="submit" placeholder="submit" />
+    </form>
+
+    <script>
+      let form0 = document.forms[0]; //create account
+      let form1 = document.forms[1]; // login account
+
+       
+
+      form0.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        user = {
+          username: e.target[0].value,
+          password: e.target[1].value,
+        };
+
+        let data = await fetch("http://localhost:3003", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+      });
+
+    
+      form1.addEventListener('submit',(event)=>{
+        event.preventDefault()
+
+         let username2 = event.target[0].value;
+         let password2 = event.target[1].value;
+       
+          
+       
+
+          
+        async function fun1() {
+
+
+        
+        let data = await fetch("http://localhost:3003")
+        let resData = await data.json()
+        
+
+
+         let condition = resData.some((val,ind)=>val.username === username2 && val.password == password2)
+
+        if(condition){
+
+            console.log('alredy');
+            
+            
+        }
+        else{
+
+            console.log('create first account');
+            
+
+        }
+
+
+    }
+
+    fun1()
+
+
+
+      })
+    
+
+  
+    </script>
+  </body>
+</html>
